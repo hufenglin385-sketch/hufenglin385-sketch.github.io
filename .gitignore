@@ -1,0 +1,6 @@
+output/
+assets/*-source.jpg
+assets/lake-source.jpg
+node_modules/
+__pycache__/
+.DS_Store
