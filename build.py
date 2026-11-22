@@ -40,7 +40,7 @@ def read_minutes(post):
 def header():
     return f'''<a class="skip" href="#main">跳到正文</a>
 <header class="site-header"><nav class="nav-inner" aria-label="主导航">
-<a class="wordmark" href="/" aria-label="HF Notes 首页">HF Notes<span class="wordmark-dot" aria-hidden="true">.</span></a>
+<a class="wordmark" href="/" aria-label="随便写点 首页">随便写点</a>
 <div class="nav-links"><a href="/#notes">文章</a><a href="/#about">关于</a>
 <a href="{esc(site['github'])}" target="_blank" rel="noopener noreferrer">GitHub<span class="sr-only">（新窗口）</span></a>
 <button class="search-trigger" type="button" data-open-search aria-label="搜索文章" hidden><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.8"/><path d="m16 16 4.5 4.5"/></svg></button></div>
@@ -48,8 +48,8 @@ def header():
 
 def footer():
     return f'''<footer class="site-footer"><div class="footer-inner">
-<div class="footer-top"><a class="wordmark" href="/">HF Notes.</a><span>保持好奇，持续记录。</span></div>
-<div class="footer-bottom"><span>© {esc(site['since'])} HF Notes</span><div>
+<div class="footer-top"><a class="wordmark" href="/">随便写点</a><span>保持好奇，持续记录。</span></div>
+<div class="footer-bottom"><span>© {esc(site['since'])} 随便写点</span><div>
 <a href="/feed.xml">RSS 订阅</a><a href="{esc(site['github'])}" target="_blank" rel="noopener noreferrer">GitHub</a>
 <a href="https://images.unsplash.com/photo-1496181133206-80ce9b88a853" target="_blank" rel="noopener noreferrer">封面 · Unsplash</a>
 </div></div></div></footer>'''
@@ -61,12 +61,12 @@ def layout(title, description, path, body, kind="website"):
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{esc(title)}</title><meta name="description" content="{esc(description)}">
 <meta name="theme-color" content="#f5f5f7"><meta name="referrer" content="strict-origin-when-cross-origin">
-<link rel="canonical" href="{esc(canonical)}"><link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
-<link rel="alternate" type="application/rss+xml" title="HF Notes" href="/feed.xml">
+<link rel="canonical" href="{esc(canonical)}"><link rel="icon" href="/assets/site-icon.jpg?v=20261122" type="image/jpeg">
+<link rel="alternate" type="application/rss+xml" title="随便写点" href="/feed.xml">
 <meta property="og:type" content="{kind}"><meta property="og:title" content="{esc(title)}">
 <meta property="og:description" content="{esc(description)}"><meta property="og:url" content="{esc(canonical)}">
 <meta property="og:image" content="{esc(site['url'])}/assets/workspace.webp"><meta property="og:locale" content="zh_CN">
-<link rel="stylesheet" href="/assets/style.css"><script src="/assets/app.js" defer></script>
+<link rel="stylesheet" href="/assets/style.css?v=20261122-2"><script src="/assets/app.js" defer></script>
 </head><body>{header()}{body}{footer()}</body></html>'''
 
 def row(post):
@@ -82,10 +82,11 @@ categories = list(dict.fromkeys(post["category"] for post in posts))
 filters = '<button type="button" class="filter is-active" data-filter="all" aria-pressed="true">全部</button>'
 filters += "".join(f'<button type="button" class="filter" data-filter="{esc(category)}" aria-pressed="false">{esc(category)}</button>' for category in categories)
 rows = "".join(row(post) for post in posts)
+about_story = "".join("<p>"+esc(paragraph)+"</p>" for paragraph in data["about"]["paragraphs"])
 home = f'''<main id="main">
 <section class="hero" aria-labelledby="hero-title">
 <div class="hero-copy"><p class="eyebrow hero-enter">我的一小片互联网</p>
-<h1 id="hero-title" class="hero-enter">HF Notes<span>.</span></h1>
+<h1 id="hero-title" class="hero-enter">随便写点</h1>
 <p class="hero-description hero-enter">保持好奇。让想法继续。</p>
 <p class="hero-subtitle hero-enter">记录学习、尝试，和每一次新的开始。</p>
 <div class="hero-actions hero-enter"><a class="button button-primary" href="#notes">开始阅读</a><a class="button button-outline" href="#about">关于我</a></div></div>
@@ -105,14 +106,11 @@ home = f'''<main id="main">
 <noscript><p class="noscript">所有文章已列出。启用 JavaScript 后可使用搜索与分类。</p></noscript>
 </div></section>
 <section class="about section" id="about" aria-labelledby="about-title"><div class="content-width">
-<div class="section-heading reveal"><p class="eyebrow">很高兴，在这里遇见你。</p><h2 id="about-title">关于我。<br><span class="muted">也关于正在发生的事。</span></h2>
-<p class="about-intro">我正在搭建自己的博客，<br class="desktop-break">把学习中的问题、动手尝试的过程，慢慢写下来。</p></div>
-<div class="about-details reveal"><div><h3>现在</h3><p>从一个自己的博客开始。</p><p class="muted">尝试把想法变成页面，也让零散的记录有一个长期停留的地方。</p></div>
-<div><h3>在这里</h3><p>分享经历，也记录思考。</p><p class="muted">公开值得分享的过程，保留未公开项目的具体实现和业务细节。</p></div></div>
-<div class="milestone reveal"><span>2026.11</span><p>第一次搭建个人博客，开始在自己的空间里记录。</p><span class="milestone-label">新的开始</span></div>
+<div class="section-heading reveal"><p class="eyebrow">很高兴，在这里遇见你。</p><h2 id="about-title">关于我。<br><span class="muted">也关于正在发生的事。</span></h2></div>
+<div class="about-story reveal">{about_story}</div>
 <a class="text-link reveal" href="{esc(site['github'])}" target="_blank" rel="noopener noreferrer">在 GitHub 找到我</a>
 </div></section></main>'''
-write("index.html", layout("HF Notes · 学习、记录与创造", site["description"], "/", home))
+write("index.html", layout("随便写点 · 学习、记录与创造", site["description"], "/", home))
 
 for index, post in enumerate(posts):
     sections = "".join(f'''<section id="{esc(section['id'])}" class="article-section"><h2>{esc(section['title'])}</h2>{''.join('<p>'+esc(paragraph)+'</p>' for paragraph in section['paragraphs'])}</section>''' for section in post["sections"])
@@ -128,17 +126,17 @@ for index, post in enumerate(posts):
 <article class="article-body">{sections}</article>
 <div class="article-share"><span>感谢你读到这里。</span><button type="button" class="button button-outline" data-copy-link hidden>复制文章链接</button><span class="copy-status" role="status" aria-live="polite"></span></div>
 {next_link}</main>'''
-    write(f"notes/{post['slug']}/index.html", layout(post["title"]+" · HF Notes", post["excerpt"], f"/notes/{post['slug']}/", article, "article"))
+    write(f"notes/{post['slug']}/index.html", layout(post["title"]+" · 随便写点", post["excerpt"], f"/notes/{post['slug']}/", article, "article"))
 
 not_found = '''<main id="main" class="not-found"><p class="eyebrow">404</p><h1>这一页，<br>还没有写下。</h1><p>地址可能有误，也可能这篇笔记已经搬家。</p><a class="button button-primary" href="/">回到首页</a></main>'''
-write("404.html", layout("页面未找到 · HF Notes", "回到 HF Notes 继续阅读。", "/404.html", not_found))
+write("404.html", layout("页面未找到 · 随便写点", "回到 随便写点 继续阅读。", "/404.html", not_found))
 base = site["url"].rstrip("/")
 rss_items = []
 for post in posts:
     link = base + f"/notes/{post['slug']}/"
     published = datetime.fromisoformat(post["date"]).replace(tzinfo=timezone.utc).strftime("%a, %d %b %Y %H:%M:%S GMT")
     rss_items.append(f'<item><title>{xml_escape(post["title"])}</title><link>{link}</link><guid>{link}</guid><description>{xml_escape(post["excerpt"])}</description><category>{xml_escape(post["category"])}</category><pubDate>{published}</pubDate></item>')
-write("feed.xml", '<?xml version="1.0" encoding="UTF-8"?>\n<rss version="2.0"><channel><title>HF Notes</title><link>'+base+'</link><description>'+xml_escape(site["description"])+'</description><language>zh-CN</language>'+''.join(rss_items)+'</channel></rss>\n')
+write("feed.xml", '<?xml version="1.0" encoding="UTF-8"?>\n<rss version="2.0"><channel><title>随便写点</title><link>'+base+'</link><description>'+xml_escape(site["description"])+'</description><language>zh-CN</language>'+''.join(rss_items)+'</channel></rss>\n')
 urls = [base+"/"] + [base+f'/notes/{post["slug"]}/' for post in posts]
 write("sitemap.xml", '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'+''.join('<url><loc>'+url+'</loc></url>' for url in urls)+'</urlset>\n')
 write("robots.txt", "User-agent: *\nAllow: /\nSitemap: "+base+"/sitemap.xml\n")

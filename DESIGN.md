@@ -1,4 +1,4 @@
-# HF Notes
+# 随便写点
 
 Visual thesis: an Apple-inspired personal space with full-width frost-gray sections, centered oversized typography, a single blue interactive accent, and one photographic laptop showcase.
 

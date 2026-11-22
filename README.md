@@ -1,10 +1,10 @@
-# HF Notes
+# 随便写点
 
 一个部署在 GitHub Pages 上的轻量中文个人博客。网站没有依赖包、广告、统计脚本或远程字体。
 
 ## 修改内容
 
-编辑 `content.json`：`site` 保存博客名字与简介；`posts` 保存文章。每篇文章有唯一的 `slug`、标题、分类、日期、摘要和若干段落。
+编辑 `content.json`：`site` 保存博客名字与简介；`posts` 保存文章；about.paragraphs 保存「关于我」的文案。每篇文章有唯一的 `slug`、标题、分类、日期、摘要和若干段落。
 
 ```powershell
 python build.py
